@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Adicionar Endereço</h2>
+        <input type="text" [(ngModel)]="cep" placeholder="CEP">
+        <button (click)="adicionarEndereco()">Adicionar</button>
+    </div>
+    <div *ngIf="enderecos.length > 0" class="table-container">
+        <h2>Endereços Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>CEP</th>
+                    <th>Rua</th>
+                    <th>Cidade</th>
+                    <th>Bairro</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let endereco of enderecos">
+                    <td>{{ endereco.cep }}</td>
+                    <td>{{ endereco.logradouro }}</td>
+                    <td>{{ endereco.localidade }}</td>
+                    <td>{{ endereco.bairro }}</td>
+                    <td>
+                        <!-- <button (click)="editAddress(address)">Editar</button> -->
+                        <button (click)="deleteAddress(endereco)">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="login-container">
+    <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+        <span class="texto-principal">Cadastrar</span>
+        <div>
+            <label>Login:</label>
+            <input type="text" formControlName="username" />
+        </div>
+        <div>
+            <label>Senha:</label>
+            <input type="password" formControlName="password" />
+        </div>
+        <button type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
+        <a routerLink="">Login</a>
+    </form>
+</div>
+  
