@@ -28,31 +28,53 @@ export class LoginComponent implements OnInit {
     }
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
-    this.loginService.logarService({username, password}).subscribe((data: any) => {
-      if(this.verificarLogin(data, username, password)){
-        this.loginForm.get('username')?.setValue('');
-        this.loginForm.get('password')?.setValue('');
-        this.router.navigate(['/crud-cep']);
-      } else {
-        swal.fire({
-          icon: 'error',
-          title: 'Credenciais inválidas',
-          text: 'Usuário ou senha incorretos',
-        });
-      }
-    }, erro => {
-      console.log(erro)
-    })
+    this.loginService.logarService({username: username, password: password})
+      .then((loginValido: boolean) => {
+        if (loginValido) {
+          localStorage.setItem('username', username);
+          localStorage.setItem('password', password);
+          this.loginForm.get('username')?.setValue('');
+          this.loginForm.get('password')?.setValue('');
+          this.router.navigate(['/crud-cep']);
+        } else {
+          swal.fire({
+            icon: 'error',
+            title: 'Credenciais inválidas',
+            text: 'Usuário ou senha incorretos',
+          });
+        }
+      })
+      .catch((erro: any) => {
+        console.log(erro);
+      });
+    // this.loginService.logarService({username, password}).subscribe((data: any) => {
+    //   this.loginForm.get('username')?.setValue('');
+    //   this.loginForm.get('password')?.setValue('');
+    //   this.router.navigate(['/crud-cep']);
+    //   // if(this.verificarLogin(data, username, password)){
+    //   //   this.loginForm.get('username')?.setValue('');
+    //   //   this.loginForm.get('password')?.setValue('');
+    //   //   this.router.navigate(['/crud-cep']);
+    //   // } else {
+    //   //   swal.fire({
+    //   //     icon: 'error',
+    //   //     title: 'Credenciais inválidas',
+    //   //     text: 'Usuário ou senha incorretos',
+    //   //   });
+    //   // }
+    // }, (erro: any) => {
+    //   console.log(erro)
+    // })
   }
 
-  verificarLogin(lista: { username: string, password: string }[], username: string, password: string): boolean {
-    for (let i = 0; i < lista.length; i++) {
-      const obj = lista[i];
-      if (obj.username === username && obj.password === password) {
-        return true;
-      }
-    }
-    return false;
-  }
+  // verificarLogin(lista: { username: string, password: string }[], username: string, password: string): boolean {
+  //   for (let i = 0; i < lista.length; i++) {
+  //     const obj = lista[i];
+  //     if (obj.username === username && obj.password === password) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
   
 }

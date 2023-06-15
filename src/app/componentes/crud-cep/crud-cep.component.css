@@ -27,6 +27,14 @@
     border: 1px solid #ccc;
     border-radius: 3px;
   }
+
+  .form-container select{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
   
   .form-container button {
     width: 100%;
@@ -41,6 +49,7 @@
   .table-container {
     margin-top: 0px;
     border-collapse: collapse;
+    text-align: center;
   }
   
   .table-container th,
@@ -74,5 +83,18 @@
   
   .actions-container button:last-child {
     margin-right: 0;
+  }
+
+  .table-container button{
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border-style: none;
+    cursor: pointer;
+  }
+
+  .table-container button:hover{
+    background-color: rgba(255, 0, 0, 0.5);
   }
   

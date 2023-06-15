@@ -27,9 +27,18 @@ export class CadastroComponent implements OnInit {
     }
     const username = this.cadastroForm.value.username;
     const password = this.cadastroForm.value.password;
-    this.cadastroService.cadastrarService({username, password}).then(data => {
+    const endereco = {
+      nome: 'nome',
+      dataDeNascimento: 'data de nascimento',
+      cep: 'cep',
+      estado: 'estado',
+      cidade: 'cidade',
+      bairro: 'bairro',
+      rua: 'rua'
+    }
+    this.cadastroService.cadastrarService({username: username, password: password, enderecos: [endereco]}).then(data => {
       console.log(data);
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }).catch(erro => {
       console.log(erro);
       swal.fire({

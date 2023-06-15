@@ -3,7 +3,7 @@ export const environment = {
     firebase: {
       apiKey: 'AIzaSyClzBnbITW-8vC0VhtRpXS5pNqMpb7FtWw',
       authDomain: 'provadevops-bbd39.firebaseapp.com',
-      databaseURL: 'https://provadevops-bbd39-default-rtdb.firebaseio.com/',
+      databaseURL: 'https://armazena-pessoas-default-rtdb.firebaseio.com/',
       projectId: 'provadevops-bbd39',
       storageBucket: 'provadevops-bbd39.appspot.com',
       messagingSenderId: '904246939178',

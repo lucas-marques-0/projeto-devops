@@ -9,6 +9,6 @@ export class CadastroService {
   constructor(private db: AngularFireDatabase) { }
 
   cadastrarService(objUsuario: any){
-    return this.db.list('provadevops-bbd39-default-rtdb').push(objUsuario);
+    return this.db.list('armazena-pessoas-default-rtdb').push(objUsuario);
   }
 }

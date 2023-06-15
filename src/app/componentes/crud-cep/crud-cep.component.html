@@ -1,30 +1,57 @@
 <div class="container">
     <div class="form-container">
-        <h2>Adicionar Endereço</h2>
-        <input type="text" [(ngModel)]="cep" placeholder="CEP">
-        <button (click)="adicionarEndereco()">Adicionar</button>
+        <h2>Cadastrar Pessoas</h2>
+        <input type="text" [(ngModel)]="nome" placeholder="Nome">
+        <input type="text" [(ngModel)]="dataNascimento" placeholder="Data de nascimento">
+        <input type="text" [(ngModel)]="cep" placeholder="CEP" (change)="verificarCarregarEndereco()">
+        <select [(ngModel)]="estado" (change)="carregarCamposEndereco($event)">
+            <option value="">Selecione...</option>
+            <option *ngFor="let estado of listaEstados">
+                {{ estado['sigla'] }}
+            </option>   
+        </select>
+        <select [(ngModel)]="cidade">
+            <option value="">Selecione...</option>
+            <option *ngFor="let cidade of listaCidades">
+                {{ cidade['nome'] }}
+            </option>
+        </select>
+        <input type="text" [(ngModel)]="bairro" placeholder="Bairro" [readOnly]="colocouCep">
+        <input type="text" [(ngModel)]="rua" placeholder="Rua" [readOnly]="colocouCep">
+        <div *ngIf="!modoEdicao">
+            <button (click)="cadastrarPessoa()">Adicionar</button>
+        </div>
+        <div *ngIf="modoEdicao">
+            <button (click)="confirmarEdicao()">Editar</button>
+        </div>
     </div>
-    <div *ngIf="enderecos.length > 0" class="table-container">
-        <h2>Endereços Cadastrados</h2>
+    <div *ngIf="listaPessoas.length > 0" class="table-container">
+        <h2>Pessoas Cadastradas</h2>
         <table>
             <thead>
                 <tr>
-                    <th>CEP</th>
-                    <th>Rua</th>
-                    <th>Cidade</th>
-                    <th>Bairro</th>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>Cep</th>
+                    <th>Estado</th>
+                    <th>Cidade</th>    
+                    <th>Bairro</th>  
+                    <th>Rua</th>               
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let endereco of enderecos">
-                    <td>{{ endereco.cep }}</td>
-                    <td>{{ endereco.logradouro }}</td>
-                    <td>{{ endereco.localidade }}</td>
-                    <td>{{ endereco.bairro }}</td>
+                <tr *ngFor="let pessoa of listaPessoas">
+                    <td>{{ pessoa.nome }}</td>
+                    <td>{{ pessoa.dataDeNascimento }}</td>
+                    <td>{{ pessoa.cep }}</td>
+                    <td>{{ pessoa.estado }}</td>
+                    <td>{{ pessoa.cidade }}</td>
+                    <td>{{ pessoa.bairro }}</td>
+                    <td>{{ pessoa.rua }}</td>
                     <td>
-                        <!-- <button (click)="editAddress(address)">Editar</button> -->
-                        <button (click)="deleteAddress(endereco)">Excluir</button>
+                        <button (click)="editarPessoa(pessoa)" style="background-color: blue; margin-right: 10px;">Editar</button>
+                        <button (click)="deletarPessoa(pessoa)">Excluir</button>
                     </td>
                 </tr>
             </tbody>
